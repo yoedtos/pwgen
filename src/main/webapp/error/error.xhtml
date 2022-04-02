@@ -1,0 +1,33 @@
+<ui:composition
+ 	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<ui:include src="/error/layout.xhtml" />
+	<title>Error</title>
+</h:head>
+
+<h:body styleClass="center">
+	<h:graphicImage name="images/error.jpg"/>
+	<br/>
+	<table class="center">
+		<tr>
+			<td>Status Code</td>
+			<td>#{errorHandler.statusCode}</td>
+		</tr>
+		<tr>
+			<td>Error Message</td>
+			<td>#{errorHandler.message}</td>
+		</tr>
+		<tr>
+			<td>Exception Class Name</td>
+			<td>#{errorHandler.exceptionClassName}</td>
+		</tr>
+		<tr>
+			<td>Request URI</td>
+			<td>#{errorHandler.requestURI}</td>
+		</tr>
+	</table>
+</h:body>
+</ui:composition>

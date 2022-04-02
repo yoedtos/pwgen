@@ -1,0 +1,79 @@
+<ui:composition
+ 	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+ <h:head>
+	<title>Password Generator on Line</title>
+ </h:head>
+ <h:body>
+ 	<h:messages styleClass="messages"/>
+	<h:form>
+		<div class="box shadow">
+			<h:panelGrid columns="2" styleClass="left-box">
+				<f:facet name="header">
+						<h:outputText value="Setting" />
+				</f:facet>
+				Algorithm:
+				<h:selectOneRadio value="#{generator.algorithm}" layout="pageDirection" required="true" requiredMessage="Algorithm is required">
+					<f:selectItem itemValue="Pr" itemLabel="Pronouceable" />
+					<f:selectItem itemValue="Rd" itemLabel="Random" />
+				</h:selectOneRadio>
+				Symbols Set:
+				<h:selectManyCheckbox value="#{generator.symbols}" layout="pageDirection" required="true" requiredMessage="Symbols Set is required">
+					<f:selectItem itemValue="s" itemLabel="Small Letters" />
+					<f:selectItem itemValue="C" itemLabel="Capital Letters" />
+					<f:selectItem itemValue="N" itemLabel="Numbers" />
+					<f:selectItem itemValue="S" itemLabel="Symbols" />
+				</h:selectManyCheckbox>
+			</h:panelGrid>
+		</div>
+		<div class="box shadow">
+			<h:panelGrid columns="2">
+				<f:facet name="header">
+					<h:outputText value="Amount and Length" />
+				</f:facet>
+				Amount of passwords:
+				<h:inputText id="input_amount_pass" value="#{generator.amount}" size="4" required="true" 
+							requiredMessage="Amount is required"
+							validatorMessage="Amount is out of 1 ~ 20 size">
+					<f:validateLongRange minimum="1" maximum="20" for="input_max_length"/>
+				</h:inputText>
+				Min. password length:
+				<h:inputText value="#{generator.minValue}" size="4" disabled="true"/>
+				Max. password length:
+				<h:inputText id="input_max_length" value="#{generator.maxValue}" size="4" required="true" 
+								requiredMessage="Maximum Length is required" 
+								validatorMessage="Length is out of 5 ~ 50 size">
+					 <f:validateLongRange minimum="5" maximum="50" for="input_max_length"/>
+				</h:inputText>		
+			</h:panelGrid>
+			<br/>
+			<h:panelGrid columns="2" >
+				<f:facet name="header">
+					<h:outputText value="User's Seed" />
+				</f:facet>
+				Seed:        
+				<h:inputText id="input_seed" style="float:right;" value="#{generator.seed}" size="6" 
+								validatorMessage="Seed is out 10 size">
+					<f:validateLength maximum="10" for="input_seed"/>
+				</h:inputText>
+			</h:panelGrid>
+		</div>
+			<h:panelGroup style="display:block;text-align:center">
+				<h:commandButton styleClass="button" value="Generate" action="#{generator.doIt}" />
+			</h:panelGroup>
+	</h:form>
+	<br />
+	
+	<h:panelGroup rendered="#{(generator.listPasswords.size() > 0)}">
+		<hr />
+		<ul class="striped-list">
+			<ui:repeat value="#{generator.listPasswords}" var="passwords">		
+		        <li>#{passwords}</li>
+	      	</ui:repeat>
+      	</ul>
+	</h:panelGroup>
+ </h:body>
+</ui:composition>

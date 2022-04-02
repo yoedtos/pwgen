@@ -1,0 +1,26 @@
+.center {
+  text-align: center;
+}
+
+.center img {
+  margin-top: 13vw;	
+  width: 50%;
+  height: auto;	
+}
+
+.center table {
+  margin: 0 auto;
+  text-align: left;
+  padding-top: 20px;
+}
+
+.center td {
+  padding: 5px 10px;
+
+}
+
+.center td:first-child {
+  border-left-width: 5px;
+  border-left-color: blue;
+  border-left-style: solid;
+}
